@@ -1,0 +1,11 @@
+# use glob syntax.
+syntax: glob
+
+# Emacs backup files
+*~
+
+# OS X Finder droppings
+\.DS_Store
+
+# Python bytecode files
+*.pyc
