@@ -1,7 +1,12 @@
 Arduino / AVRUSB integration
 ----------------------------
 
-* NOTE: THIS ONLY WORKS with Arduino 0016 not 0017 currently. 
+* NOTE: This should now work with Arduino IDE 0018 onward but I've only
+        tested with 0020.
+
+* Source now available as a Mercurial repository here:
+
+      <http://code.google.com/p/vusb-for-arduino/>
 
 * Build the USB mini-shield documented here: 
 
@@ -31,3 +36,5 @@ Version history:
 * 2009-10-16 -- "Not a Patch On" -- Incorporate previous changes & pcb design
 
 * 2009-10-18 -- "All Your Upgrade" -- Upgrade base V-USB version to 2009-08-22
+
+* 2010-10-17 -- "Year, So What" -- Update to work with recent IDEs

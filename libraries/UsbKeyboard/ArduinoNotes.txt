@@ -28,7 +28,7 @@ Notes On Integrating AVRUSB with Arduino
 * (NOTE: Initial 'usbconfig.h' used will be based on the file from
  'HIDKeys.2007-03-29'.) (Note: Have now upgraded to V-USB 2009-08-22.)
 
-* At present the IDE won't compile our library so it needs to be pre-compiled
-  with:
+* Versions of the Arduino IDE prior to 0018 won't compile our library
+  so it needs to be pre-compiled with:
 
     avr-g++  -Wall -Os -I. -DF_CPU=16000000 -mmcu=atmega168  -c usbdrvasm.S  -c usbdrv.c
