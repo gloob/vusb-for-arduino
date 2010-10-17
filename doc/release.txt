@@ -2,6 +2,6 @@ How to make a release archive:
 
   hg tag release-alpha-XXX
 
-  hg archive -t zip -X .hgignore -X doc/release.txt -p vusb-for-arduino-XXX -r release-alpha-XXX releases/vusb-for-arduino-XXX.zip
+  hg archive -t zip -X .hgignore -X .hgtags -X doc/release.txt -p vusb-for-arduino-XXX -r release-alpha-XXX releases/vusb-for-arduino-XXX.zip
 
 
