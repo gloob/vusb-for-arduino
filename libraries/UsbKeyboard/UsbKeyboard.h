@@ -6,24 +6,31 @@
 #ifndef __UsbKeyboard_h__
 #define __UsbKeyboard_h__
 
-#include <avr/pgmspace.h>
-#include <avr/interrupt.h>
 #include <string.h>
+
+#include <avr/io.h>
+#include <avr/wdt.h>
+#include <avr/interrupt.h>  /* for sei() */
+#include <util/delay.h>     /* for _delay_ms() */
+
+#include <avr/pgmspace.h>   /* required by usbdrv.h */
+
+#ifdef __cplusplus
+extern "C"
+{
+#endif
 
 #include "usbdrv.h"
 
-// TODO: Work around Arduino 12 issues better.
-//#include <WConstants.h>
-//#undef int()
+#ifdef __cplusplus
+}
+#endif
 
 typedef uint8_t byte;
 
-
 #define BUFFER_SIZE 4 // Minimum of 2: 1 for modifiers + 1 for keystroke 
 
-
 static uchar    idleRate;           // in 4 ms units 
-
 
 /* We use a simplifed keyboard report descriptor which does not support the
  * boot protocol. We don't allow setting status LEDs and but we do allow
@@ -33,7 +40,7 @@ static uchar    idleRate;           // in 4 ms units
  * Redundant entries (such as LOGICAL_MINIMUM and USAGE_PAGE) have been omitted
  * for the second INPUT item.
  */
-PROGMEM char usbHidReportDescriptor[35] = { /* USB report descriptor */
+PROGMEM const char usbHidReportDescriptor[35] = { /* USB report descriptor */
   0x05, 0x01,                    // USAGE_PAGE (Generic Desktop) 
   0x09, 0x06,                    // USAGE (Keyboard) 
   0xa1, 0x01,                    // COLLECTION (Application) 
@@ -135,7 +142,6 @@ class UsbKeyboardDevice {
     usbDeviceDisconnect();
     usbDeviceConnect();
 
-
     usbInit();
       
     sei();
@@ -188,11 +194,7 @@ class UsbKeyboardDevice {
 
 UsbKeyboardDevice UsbKeyboard = UsbKeyboardDevice();
 
-#ifdef __cplusplus
-extern "C"{
-#endif 
-  // USB_PUBLIC uchar usbFunctionSetup
-uchar usbFunctionSetup(uchar data[8]) 
+usbMsgLen_t usbFunctionSetup(uchar data[8])
   {
     usbRequest_t    *rq = (usbRequest_t *)((void *)data);
 
@@ -219,9 +221,5 @@ uchar usbFunctionSetup(uchar data[8])
     }
     return 0;
   }
-#ifdef __cplusplus
-} // extern "C"
-#endif
-
 
 #endif // __UsbKeyboard_h__
